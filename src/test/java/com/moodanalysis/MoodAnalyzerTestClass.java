@@ -53,5 +53,52 @@ public class MoodAnalyzerTestClass
             Assert.assertEquals(MoodAnalysisException.MyException_Type.EMPTY,e.type);
         }
     }
+
+    /*TC4.1:Given class name should return MoodAnalyzer object*/
+    @Test
+    public void givenClassName_DefaultCustructor_WhenProper_ThenReturnObject() throws MoodAnalysisException
+    {
+        try
+        {
+            MoodAnalyzer mood = new MoodAnalyzer();
+            MoodAnalyzer analyzemood = MoodAnalyserFactory.createMoodAnalyzer();
+            boolean result = analyzemood.equals(mood);
+            Assert.assertEquals(true,result);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /*TC4.2:Given class name when improper should throw MoodAnalysis exception*/
+    @Test
+    public void givenClassName_WhenImproper_ThenThrowMoodAnalysisException() throws MoodAnalysisException
+    {
+        try
+        {
+            MoodAnalyzer mood = new MoodAnalyzer();
+            MoodAnalyserFactory.getConstructor("MoodAnalyzer",String.class);
+        }
+        catch(MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.CLASS_NOT_FOUND,e.type);
+        }
+    }
+
+    /*TC4.3:Given class name when constuctor improper then throw exception*/
+    @Test
+    public void givenClassName_Constructor_Whenimproper_ThenThrowMoodAnalysisException() throws MoodAnalysisException
+    {
+        try
+        {
+            MoodAnalyzer mood = new MoodAnalyzer();
+            MoodAnalyserFactory.getConstructor("com.moodanalysis.MoodAnalyzer",Integer.class);
+        }
+        catch(MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.METHOD_NOT_FOUND,e.type);
+        }
+    }
 }
 

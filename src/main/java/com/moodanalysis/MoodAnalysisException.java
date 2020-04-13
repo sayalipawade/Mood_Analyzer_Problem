@@ -3,7 +3,7 @@ public class MoodAnalysisException extends Exception
 {
     enum MyException_Type
     {
-        EMPTY,NULL;
+        EMPTY,NULL,CLASS_NOT_FOUND,METHOD_NOT_FOUND;
     }
     MyException_Type type;
     MyException_Type exceptionMessage;

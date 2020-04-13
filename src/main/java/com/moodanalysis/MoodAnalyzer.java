@@ -1,4 +1,7 @@
 package com.moodanalysis;
+
+import java.util.Objects;
+
 public class MoodAnalyzer
 {
     private String message;
@@ -34,9 +37,29 @@ public class MoodAnalyzer
         return (mood);
     }
 
+    //Default constructor
+    public MoodAnalyzer()
+    {
+        message=null;
+    }
     // Parameterized constructor
     public MoodAnalyzer(String message)
     {
         this.message=message;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+        MoodAnalyzer that = (MoodAnalyzer) o;
+        return Objects.equals(message, that.message);
     }
 }
