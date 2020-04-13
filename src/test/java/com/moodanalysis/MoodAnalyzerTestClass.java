@@ -100,5 +100,56 @@ public class MoodAnalyzerTestClass
             Assert.assertEquals(MoodAnalysisException.MyException_Type.METHOD_NOT_FOUND,e.type);
         }
     }
+
+    /*TC5.1:Given class name when proper should return MoodAnalyser object*/
+    @Test
+    public void givenMoodAnalyser_ParameterConstructor_WhenProper_ThenReturnObject()  throws MoodAnalysisException
+    {
+        try
+        {
+            MoodAnalyzer mood = new MoodAnalyzer("i am in happy mood");
+            Object returnMood=MoodAnalyserFactory.getParameterizConstructor("com.moodanalysis.MoodAnalyzer",String.class,"i am in happy mood");
+            boolean result = returnMood.equals(mood);
+            Assert.assertEquals(true,result);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /*TC5.2:Given class name when improper should throw MoodAnalysis exception*/
+    @Test
+    public void givenClassName_WhenImproper_ShouldThrowMoodAnalysisException() throws MoodAnalysisException
+    {
+        try
+        {
+            MoodAnalyzer mood = new MoodAnalyzer("i am in happy mood");
+            Object returnMood=MoodAnalyserFactory.getClassNameImproperWithParameter("com.moodanalysis.MoodAnalyze",String.class,"i am in happy mood");
+            boolean result=returnMood.equals(mood);
+            Assert.assertEquals(true,result);
+        }
+        catch(MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.CLASS_NOT_FOUND,e.type);
+        }
+    }
+
+    /*TC5.3:Given class name when constructor improper should throw MoodAnalysis exception*/
+    @Test
+    public void givenClassName_WhenConstructorImproper_ThenThrowMoodAnalysisException() throws MoodAnalysisException
+    {
+        try
+        {
+            MoodAnalyzer mood = new MoodAnalyzer("i am in happy mood");
+            Object returnMood=MoodAnalyserFactory.getParameterizConstructor("com.moodanalysis.MoodAnalyzer",Integer.class,"i am in happy mood");
+            boolean result = returnMood.equals(mood);
+        }
+        catch(MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.METHOD_NOT_FOUND,e.type);
+        }
+    }
 }
+
 
