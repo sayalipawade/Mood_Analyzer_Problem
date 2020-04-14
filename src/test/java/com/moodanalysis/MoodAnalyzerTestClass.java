@@ -2,6 +2,9 @@ package com.moodanalysis;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 public class MoodAnalyzerTestClass
 {
     /* TC1.1:Given I am in sad mood message should return sad */
@@ -150,6 +153,61 @@ public class MoodAnalyzerTestClass
             Assert.assertEquals(MoodAnalysisException.MyException_Type.METHOD_NOT_FOUND,e.type);
         }
     }
+
+    /*TC6.1:Given message when proper should return happy */
+    @Test
+    public void givenHappy_WhenProper_ThenReturnHappyMood() throws MoodAnalysisException
+    {
+        try
+        {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalysis.MoodAnalyzer",String.class);
+            Object instance = constructor.newInstance("i am in happy mood");
+            String analyser = MoodAnalyserFactory.moodAnalyzer ( (MoodAnalyzer) instance ,"moodAnalyzer") ;
+            Assert.assertEquals("happy",analyser);
+        }
+        catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+        catch (InstantiationException e)
+        {
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /*TC6.2:Given message when improper should throw MoodAnalysis Exception */
+    @Test
+    public void givenHappyMessage_WhenImproperMethod_ShouldThrowMoodAnalysisException()
+    {
+        try
+        {
+            Constructor<?> constructor = MoodAnalyserFactory.getConstructor("com.moodanalysis.MoodAnalyzer",Integer.class);
+            Object instance = constructor.newInstance("i am in happy mood");
+            String analyser = MoodAnalyserFactory.moodAnalyzer ( (MoodAnalyzer) instance ,"moodAnalyzer") ;
+            Assert.assertEquals("happy",analyser);
+        }
+        catch (IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+        catch (InstantiationException e)
+        {
+            e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+            e.printStackTrace();
+        }
+        catch (MoodAnalysisException e)
+        {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.METHOD_NOT_FOUND,e.type);
+        }
+    }
 }
+
 
 

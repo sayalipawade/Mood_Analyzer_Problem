@@ -34,7 +34,7 @@ public class MoodAnalyzer
         {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NULL,"You entered null mood,please enter valid mood");
         }
-        return (mood);
+        return (null);
     }
 
     //Default constructor
