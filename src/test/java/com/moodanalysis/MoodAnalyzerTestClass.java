@@ -236,21 +236,6 @@ public class MoodAnalyzerTestClass
             Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD,e.type);
         }
     }
-
-    /*TC7.3:Setting null message with reflector should throw exception*/
-    @Test
-    public void givenMessageWithReflector_WhenNull_ShouldThrowException()
-    {
-        try
-        {
-            MoodAnalyzer moodAnalyze = MoodAnalyserFactory.createMoodAnalyzer();
-            MoodAnalyserFactory.setFieldMoodAnalyser(moodAnalyze,"message",null);
-        }
-        catch (MoodAnalysisException e)
-        {
-            Assert.assertEquals(MoodAnalysisException.MyException_Type.NULL,e.type);
-        }
-    }
 }
 
 
