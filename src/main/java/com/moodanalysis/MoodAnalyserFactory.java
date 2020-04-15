@@ -1,5 +1,6 @@
 package com.moodanalysis;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory
@@ -124,7 +125,31 @@ public class MoodAnalyserFactory
         }
         catch (Exception e)
         {
-            //throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.METHOD_NOT_FOUND,"Please enter valid method neme");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // set the field value
+    public static String setFieldMoodAnalyser(MoodAnalyzer mood,String fieldName,String fieldValue) throws MoodAnalysisException
+    {
+        try
+        {
+            if(fieldValue == null)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NULL,"You enter a null. Enter a valied String");
+            }
+            Field field = mood.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(mood,fieldValue);
+        }
+        catch(NoSuchFieldException e)
+        {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD,"Please enter valid field name ");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
         return null;
     }
